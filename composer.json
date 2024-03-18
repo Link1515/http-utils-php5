@@ -1,6 +1,6 @@
 {
     "name": "link1515/http-utils",
-    "description": "To make it easier to use native php, this package simply encapsulates http request and response. It is also compatible with the low version (5.x) of php.",
+    "description": "To make it easier to use native php, this package simply encapsulates some http utils for request and response. It is also compatible with the low version (5.x) of php.",
     "keywords": [
         "http",
         "http utils",
