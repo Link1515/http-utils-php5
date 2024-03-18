@@ -1,0 +1,30 @@
+{
+    "name": "link1515/http-utils",
+    "description": "To make it easier to use native php, this package simply encapsulates http request and response. It is also compatible with the low version (5.x) of php.",
+    "keywords": [
+        "http",
+        "http utils",
+        "http methods",
+        "http headers",
+        "request",
+        "request headers",
+        "response",
+        "response headers"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Link1515\\HttpUtils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Link1515",
+            "email": "mocliamglink@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.3"
+    }
+}
