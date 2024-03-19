@@ -69,7 +69,7 @@ class Request
   private $body = null;
 
   /**
-   * @property array $file
+   * @property array|null $file
    */
   private $files = null;
 
@@ -119,7 +119,9 @@ class Request
           break;
 
         default:
-          $this->body = $rawBody;
+          if (strlen($rawBody) > 0) {
+            $this->body = $rawBody;
+          }
           break;
       }
     }
@@ -128,8 +130,13 @@ class Request
   private function parseFormData($rawRequestBody)
   {
     if ($this->method === Method::POST) {
-      $this->body = $_POST;
-      $this->files = $_FILES;
+      if (count($_POST) > 0) {
+        $this->body = $_POST;
+      }
+      if (count($_FILES) > 0) {
+
+        $this->files = $_FILES;
+      }
       return;
     }
 
@@ -195,7 +202,9 @@ class Request
       $this->body = $data;
     }
 
-    $this->files = $files;
+    if (count($files) > 0) {
+      $this->files = $files;
+    }
   }
 
   public static function getInstance()
