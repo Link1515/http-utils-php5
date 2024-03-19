@@ -44,14 +44,14 @@ class Request
   private $method = '';
 
   /**
-   * @property array $cookie
+   * @property array|null $cookie
    */
-  private $cookie = [];
+  private $cookie = null;
 
   /**
-   * @property array $queryString 
+   * @property array|null $queryString 
    */
-  private $queryString = [];
+  private $queryString = null;
 
   /**
    * @property ?string $contentType 
@@ -77,7 +77,9 @@ class Request
   {
     $this->host = $_SERVER['SERVER_NAME'];
     $this->method = $_SERVER['REQUEST_METHOD'];
-    $this->cookie = $_COOKIE;
+    if (count($_COOKIE) > 0) {
+      $this->cookie = $_COOKIE;
+    }
     $this->contentType = isset($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
     $this->headers = getallheaders();
 
@@ -131,6 +133,9 @@ class Request
     }
   }
 
+  /**
+   * @param string $rawRequestBody
+   */
   private function parseFormData($rawRequestBody)
   {
     if ($this->method === Method::POST) {
