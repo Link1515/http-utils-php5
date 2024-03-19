@@ -118,6 +118,10 @@ class Request
           $this->parseFormData($rawBody);
           break;
 
+        case ContentType::X_WWW_FORM_URLENCODED:
+          parse_str($rawBody, $this->body);
+          break;
+
         default:
           if (strlen($rawBody) > 0) {
             $this->body = $rawBody;
