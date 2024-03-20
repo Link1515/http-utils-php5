@@ -83,6 +83,16 @@ class Request
     $this->contentType = isset ($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
     $this->headers = getallheaders();
 
+    if (isset ($_SERVER['QUERY_STRING'])) {
+      parse_str($_SERVER['QUERY_STRING'], $this->queryString);
+    }
+
+    $this->bindIp();
+    $this->bindRequestBody();
+  }
+
+  private function bindIp()
+  {
     $ipHeaders = [
       'HTTP_AKACIP',
       'HTTP_VERCIP',
@@ -96,18 +106,17 @@ class Request
       'HTTP_FORWARDED',
       'REMOTE_ADDR'
     ];
+
     foreach ($ipHeaders as $header) {
       if (isset ($_SERVER[$header])) {
         $this->ip = $_SERVER[$header];
         break;
       }
     }
+  }
 
-    if (isset ($_SERVER['QUERY_STRING'])) {
-      parse_str($_SERVER['QUERY_STRING'], $this->queryString);
-    }
-
-    // bind request body
+  private function bindRequestBody()
+  {
     if (in_array($this->method, [Method::POST, Method::PUT, Method::PATCH])) {
       $rawBody = file_get_contents('php://input');
 
