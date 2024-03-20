@@ -9,7 +9,8 @@
         "request",
         "request headers",
         "response",
-        "response headers"
+        "response headers",
+        "php5"
     ],
     "type": "library",
     "license": "MIT",

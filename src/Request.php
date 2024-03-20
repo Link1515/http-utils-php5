@@ -32,6 +32,15 @@ class Request
   private $ip = '';
 
   /**
+   * @property array $ipHeaderFilterChain
+   */
+  private static $ipFilterChain = [
+    'HTTP_CLIENT_IP',
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR'
+  ];
+
+  /**
    * @property string $host
    */
   private $host = '';
@@ -78,10 +87,10 @@ class Request
     if (count($_COOKIE) > 0) {
       $this->cookies = $_COOKIE;
     }
-    $this->contentType = isset ($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
+    $this->contentType = isset($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
     $this->headers = getallheaders();
 
-    if (isset ($_SERVER['QUERY_STRING'])) {
+    if (isset($_SERVER['QUERY_STRING'])) {
       parse_str($_SERVER['QUERY_STRING'], $this->queryString);
     }
 
@@ -91,22 +100,8 @@ class Request
 
   private function bindIp()
   {
-    $ipHeaders = [
-      'HTTP_AKACIP',
-      'HTTP_VERCIP',
-      'HTTP_ECCIP',
-      'HTTP_L7CIP',
-      'HTTP_CLIENT_IP',
-      'HTTP_X_FORWARDED_FOR',
-      'HTTP_X_FORWARDED',
-      'HTTP_X_CLUSTER_CLIENT_IP',
-      'HTTP_FORWARDED_FOR',
-      'HTTP_FORWARDED',
-      'REMOTE_ADDR'
-    ];
-
-    foreach ($ipHeaders as $header) {
-      if (isset ($_SERVER[$header])) {
+    foreach (self::$ipFilterChain as $header) {
+      if (isset($_SERVER[$header])) {
         $this->ip = $_SERVER[$header];
         break;
       }
@@ -180,17 +175,17 @@ class Request
       }
 
       // Parse the Content-Disposition to get the field name, etc.
-      if (isset ($headers['content-disposition'])) {
+      if (isset($headers['content-disposition'])) {
         preg_match(
           '/^(.+); *name="([^"]+)"(; *filename="([^"]+)")?/',
           $headers['content-disposition'],
           $matches
         );
         $fieldName = $matches[2];
-        $filename = isset ($matches[4]) ? $matches[4] : null;
+        $filename = isset($matches[4]) ? $matches[4] : null;
 
         //Parse File
-        if (isset ($filename)) {
+        if (isset($filename)) {
           //get tmp name
           $filenameParts = pathinfo($filename);
           $tmpName = tempnam(sys_get_temp_dir(), $filenameParts['filename']);
@@ -225,11 +220,19 @@ class Request
 
   public static function getInstance()
   {
-    if (!isset (self::$instance)) {
+    if (!isset(self::$instance)) {
       self::$instance = new self();
     }
 
     return self::$instance;
+  }
+
+  /**
+   * @param array $ipFilterChain
+   */
+  public static function setIpFilterChain(array $ipFilterChain)
+  {
+    self::$ipFilterChain = $ipFilterChain;
   }
 
   /**
