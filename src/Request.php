@@ -34,7 +34,7 @@ class Request
   /**
    * @property array $ipHeaderFilterChain
    */
-  private static $ipFilterChain = [
+  private static $ipHeaderFilterChain = [
     'HTTP_CLIENT_IP',
     'HTTP_X_FORWARDED_FOR',
     'REMOTE_ADDR'
@@ -100,7 +100,7 @@ class Request
 
   private function bindIp()
   {
-    foreach (self::$ipFilterChain as $header) {
+    foreach (self::$ipHeaderFilterChain as $header) {
       if (isset($_SERVER[$header])) {
         $this->ip = $_SERVER[$header];
         break;
@@ -230,9 +230,9 @@ class Request
   /**
    * @param array $ipFilterChain
    */
-  public static function setIpFilterChain(array $ipFilterChain)
+  public static function setIpHeaderFilterChain(array $ipHeaderFilterChain)
   {
-    self::$ipFilterChain = $ipFilterChain;
+    self::$ipHeaderFilterChain = $ipHeaderFilterChain;
   }
 
   /**

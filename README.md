@@ -84,6 +84,17 @@ $name = $request->getQueryString('name'); // Lynk
 $orderId = $request->getBody('user.order.id'); // 123
 ```
 
+Configure ipHeaderFilterChain
+
+```php
+// You can configure the ipHeaderFilterChain by yourself. Headers earlier in the array are adopted first.
+Request::setIpHeaderFilterChain([
+  'HTTP_CLIENT_IP',
+  'HTTP_X_FORWARDED_FOR',
+  'REMOTE_ADDR'
+]);
+```
+
 ### Response
 
 - Response::setHeader(string $name, string $value, bool $replace = true)
