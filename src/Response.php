@@ -32,23 +32,23 @@ class Response
   }
 
   /**
-   * @param string $url
-   * @return void
-   */
-  public static function redierct($url)
-  {
-    self::status(301);
-    header('Location: ' . $url);
-    exit;
-  }
-
-  /**
    * @param int $code
    * @return void
    */
   public static function status($code)
   {
     http_response_code($code);
+  }
+
+  /**
+   * @param string $url
+   * @return void
+   */
+  public static function redierct($url, $statusCode = 301)
+  {
+    self::status($statusCode);
+    header('Location: ' . $url);
+    exit;
   }
 
   /**

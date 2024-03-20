@@ -14,8 +14,8 @@ use Link1515\HttpUtilsPhp5\Constant\Method;
  * @method string getIp()
  * @method string getHost()
  * @method string getMethod()
- * @method string getHeaders(?string $dotNotation = null)
- * @method array|string getCookie(?string $dotNotation = null)
+ * @method array getHeaders(?string $dotNotation = null)
+ * @method array|string getCookies(?string $dotNotation = null)
  * @method array|string getQueryString(?string $dotNotation = null)
  * @method array|string|null getBody(?string $dotNotation = null)
  * @method array|null getFiles(?string $dotNotation = null)
@@ -44,9 +44,9 @@ class Request
   private $method = '';
 
   /**
-   * @property array|null $cookie
+   * @property array|null $cookies
    */
-  private $cookie = null;
+  private $cookies = null;
 
   /**
    * @property array|null $queryString 
@@ -78,7 +78,7 @@ class Request
     $this->host = $_SERVER['SERVER_NAME'];
     $this->method = $_SERVER['REQUEST_METHOD'];
     if (count($_COOKIE) > 0) {
-      $this->cookie = $_COOKIE;
+      $this->cookies = $_COOKIE;
     }
     $this->contentType = isset ($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
     $this->headers = getallheaders();
@@ -266,7 +266,7 @@ class Request
       'ip' => $this->ip,
       'host' => $this->host,
       'method' => $this->method,
-      'cookie' => $this->cookie,
+      'cookies' => $this->cookies,
       'queryString' => $this->queryString,
       'contentType' => $this->contentType,
       'headers' => $this->headers,

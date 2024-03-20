@@ -1,6 +1,6 @@
 {
     "name": "link1515/http-utils-php5",
-    "description": "For users working with PHP 5.x environments, this package provides a convenient solution. It provides encapsulated utilities for handling requests and responses",
+    "description": "For users working with PHP 5.x environments, this package provides a convenient solution. It provides encapsulated utilities for handling requests and responses.",
     "keywords": [
         "http",
         "http utils",
