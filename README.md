@@ -2,6 +2,12 @@
 
 For users working with PHP 5.x environments, this package provides a convenient solution. It provides encapsulated utilities for handling requests and responses.
 
+## Feature
+
+- Easy to use
+- Compatible with PHP 5.x
+- The request body of the PUT and PATCH method can be resolved (including multipart/form-data)
+
 ## Installation
 
 ```bash
