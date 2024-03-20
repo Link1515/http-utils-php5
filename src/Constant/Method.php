@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Link1515\HttpUtils\Constant;
+namespace Link1515\HttpUtilsPhp5\Constant;
 
 class Method
 {

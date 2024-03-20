@@ -1,5 +1,5 @@
 {
-    "name": "link1515/http-utils",
+    "name": "link1515/http-utils-php5",
     "description": "For users working with PHP 5.x environments, this package provides a convenient solution. It provides encapsulated utilities for handling requests and responses",
     "keywords": [
         "http",
@@ -15,7 +15,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Link1515\\HttpUtils\\": "src/"
+            "Link1515\\HttpUtilsPhp5\\": "src/"
         }
     },
     "authors": [

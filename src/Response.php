@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Link1515\HttpUtils;
+namespace Link1515\HttpUtilsPhp5;
 
-use Link1515\HttpUtils\Constant\ContentType;
+use Link1515\HttpUtilsPhp5\Constant\ContentType;
 
 class Response
 {
