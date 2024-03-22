@@ -14,6 +14,7 @@
     ],
     "type": "library",
     "license": "MIT",
+    "readme": "README.md",
     "autoload": {
         "psr-4": {
             "Link1515\\HttpUtilsPhp5\\": "src/"
