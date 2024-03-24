@@ -14,7 +14,7 @@ class Response
    */
   public static function setHeader($name, $value, $replace = true)
   {
-    header($name . ": " . $value, $replace);
+    header($name . ': ' . $value, $replace);
   }
 
   /**
@@ -25,7 +25,7 @@ class Response
   public static function setHeaders($headers, $replace = true)
   {
     foreach ($headers as $name => $value) {
-      header($name . ": " . $value, $replace);
+      header($name . ': ' . $value, $replace);
     }
   }
 

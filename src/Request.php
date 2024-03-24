@@ -61,7 +61,7 @@ class Request
   private $queryString = null;
 
   /**
-   * @property ?string $contentType 
+   * @property string|null $contentType 
    */
   private $contentType = null;
 
@@ -87,10 +87,10 @@ class Request
     if (count($_COOKIE) > 0) {
       $this->cookies = $_COOKIE;
     }
-    $this->contentType = isset($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
+    $this->contentType = isset ($_SERVER['CONTENT_TYPE']) ? explode(';', $_SERVER['CONTENT_TYPE'])[0] : null;
     $this->headers = getallheaders();
 
-    if (isset($_SERVER['QUERY_STRING'])) {
+    if (isset ($_SERVER['QUERY_STRING'])) {
       parse_str($_SERVER['QUERY_STRING'], $this->queryString);
     }
 
@@ -101,7 +101,7 @@ class Request
   private function bindIp()
   {
     foreach (self::$ipHeaderFilterChain as $header) {
-      if (isset($_SERVER[$header])) {
+      if (isset ($_SERVER[$header])) {
         $this->ip = $_SERVER[$header];
         break;
       }
@@ -175,17 +175,17 @@ class Request
       }
 
       // Parse the Content-Disposition to get the field name, etc.
-      if (isset($headers['content-disposition'])) {
+      if (isset ($headers['content-disposition'])) {
         preg_match(
           '/^(.+); *name="([^"]+)"(; *filename="([^"]+)")?/',
           $headers['content-disposition'],
           $matches
         );
         $fieldName = $matches[2];
-        $filename = isset($matches[4]) ? $matches[4] : null;
+        $filename = isset ($matches[4]) ? $matches[4] : null;
 
         //Parse File
-        if (isset($filename)) {
+        if (isset ($filename)) {
           //get tmp name
           $filenameParts = pathinfo($filename);
           $tmpName = tempnam(sys_get_temp_dir(), $filenameParts['filename']);
@@ -220,7 +220,7 @@ class Request
 
   public static function getInstance()
   {
-    if (!isset(self::$instance)) {
+    if (!isset (self::$instance)) {
       self::$instance = new self();
     }
 
@@ -243,7 +243,7 @@ class Request
   {
     if (method_exists($this, $methodName)) {
       return call_user_func_array([$this, $methodName], $args);
-    } else if (preg_match("/^get.*/", $methodName)) {
+    } else if (preg_match('/^get.*/', $methodName)) {
       // getter
       $propName = lcfirst(preg_replace('/^get(.*)/', '$1', $methodName));
 
