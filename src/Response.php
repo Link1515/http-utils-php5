@@ -70,7 +70,7 @@ class Response
   public static function send($data, $statusCode = 200)
   {
     self::status($statusCode);
-    echo $data;
+    echo htmlspecialchars($data);
     exit;
   }
 }
