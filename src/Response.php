@@ -42,7 +42,7 @@ class Response
    * @param string $url
    * @return void
    */
-  public static function redierct($url, $statusCode = 301)
+  public static function redierct($url, $statusCode = 302)
   {
     self::status($statusCode);
     header('Location: ' . $url);
